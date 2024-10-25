@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:paddingHorizontal="4dp"
+    android:paddingVertical="16dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Ambil Gambar"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="Kamera"
+            android:textAllCaps="false"
+            android:drawableTop="@drawable/baseline_camera_alt_24"
+            app:strokeWidth="2dp"
+            android:padding="4dp"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="Galeri"
+            android:textAllCaps="false"
+            android:drawableTop="@drawable/rounded_gallery_thumbnail_24"
+            app:strokeWidth="2dp"
+            android:padding="4dp"
+            />
+    </LinearLayout>
+</LinearLayout>
