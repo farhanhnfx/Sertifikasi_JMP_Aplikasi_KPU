@@ -67,6 +67,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Nomor Handphone"
                     android:inputType="number"
+                    android:maxLength="15"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,6 +150,7 @@
                 android:textAllCaps="false"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:strokeColor="@color/black"
+                android:drawableEnd="@drawable/baseline_location_pin_24"
                 app:strokeWidth="0.8dp"
                 android:paddingVertical="10dp"
                 />
@@ -159,7 +161,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/inp_lokasi"
                 android:layout_marginVertical="12dp"
-                android:text="Ambil Gambar"
+                android:text="Bukti Kunjungan"
+                android:drawableEnd="@drawable/rounded_gallery_thumbnail_24"
                 android:textAllCaps="false"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:strokeColor="@color/black"

@@ -238,8 +238,15 @@ class FormEntryActivity : AppCompatActivity(), CekLokasiDialogFragment.LocationL
                 null
             }
 
+            if (!isNikValid(nik)) {
+                Toast.makeText(this@FormEntryActivity, "NIK tidak valid!", Toast.LENGTH_SHORT).show()
+                return
+            }
+
             if (dbHelper.isNikOrIdExists(nik)) {
                 Toast.makeText(this@FormEntryActivity, "Sudah terdapat data NIK yang sama!", Toast.LENGTH_SHORT).show()
+                val pemilih = dbHelper.getPemilih(nik)
+                ChangeToDetailMode(pemilih!!.id)
                 return
             }
 
@@ -252,12 +259,18 @@ class FormEntryActivity : AppCompatActivity(), CekLokasiDialogFragment.LocationL
             val result = dbHelper.insertPemilih(nik, nama, phone, jk, tanggal, alamat, latitude, longitude, fotoPath)
 
             if (result != -1L) {
-                Toast.makeText(this@FormEntryActivity, "Data submitted successfully!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@FormEntryActivity, "Berhasil disimpan!", Toast.LENGTH_SHORT).show()
                 ChangeToDetailMode(result.toInt())
             } else {
-                Toast.makeText(this@FormEntryActivity, "Failed to submit data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@FormEntryActivity, "Gagal disimpan", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun isNikValid(nik: String): Boolean {
+        Log.d("NIK_LENGTH", nik.length.toString())
+        Log.d("NIK_LENGTH_BOOL", (nik.length == 16).toString())
+        return nik.length == 16
     }
 
     private fun ChangeToDetailMode(pemilihId: Int) {
@@ -266,7 +279,10 @@ class FormEntryActivity : AppCompatActivity(), CekLokasiDialogFragment.LocationL
         val pemilih = dbHelper.getPemilih(pemilihId)
 
         with(binding) {
-            toolbar.txtTitle.text = "Data Pemilih"
+            toolbar.apply {
+                txtTitle.text = "Data Pemilih"
+                icBack.setOnClickListener { finish() }
+            }
             inpNik.editText?.apply {
                 setText(pemilih?.nik)
                 isClickable = false

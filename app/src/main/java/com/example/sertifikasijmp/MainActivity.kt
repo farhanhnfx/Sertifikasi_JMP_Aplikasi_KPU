@@ -1,6 +1,7 @@
 package com.example.sertifikasijmp
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,10 +15,10 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
     private val buttons = listOf(
-        CustomButton("Informasi", R.drawable.sharp_info_24) { informButton() },
-        CustomButton("Form Entri", R.drawable.baseline_post_add_24) { formEntryButton() },
-        CustomButton("Lihat Data", R.drawable.baseline_library_books_24) { dataButton() },
-        CustomButton("Keluar", R.drawable.baseline_exit_to_app_24) { exitButton() }
+        CustomButton("Informasi", R.drawable.sharp_info_24, Color.parseColor("#81D4FA")) { informButton() },
+        CustomButton("Form Entri", R.drawable.baseline_post_add_24, Color.parseColor("#81D4FA")) { formEntryButton() },
+        CustomButton("Lihat Data", R.drawable.baseline_library_books_24, Color.parseColor("#81D4FA")) { dataButton() },
+        CustomButton("Keluar", R.drawable.baseline_exit_to_app_24, Color.parseColor("#FFEF9A9A")) { exitButton() }
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun exitButton() {
-        finish()
+        finishAffinity()
+        finishAndRemoveTask()
     }
 }

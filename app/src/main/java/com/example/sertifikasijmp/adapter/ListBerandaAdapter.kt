@@ -1,6 +1,8 @@
 package com.example.sertifikasijmp.adapter
 
 import android.content.Context
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +40,14 @@ class ListBerandaAdapter(
         with(binding) {
             icon.setImageResource(button.icon)
             txtName.text = button.text
+
+            if (button.color != null) {
+                root.setBackgroundColor(button.color)
+            }
+            else {
+                root.setBackgroundColor(Color.TRANSPARENT)
+            }
+
             root.setOnClickListener {
                 button.onClick.invoke()
             }
@@ -48,4 +58,4 @@ class ListBerandaAdapter(
 }
 
 
-class CustomButton(val text: String, val icon: Int, val onClick: () -> Unit)
+class CustomButton(val text: String, val icon: Int, val color: Int? = null, val onClick: () -> Unit)

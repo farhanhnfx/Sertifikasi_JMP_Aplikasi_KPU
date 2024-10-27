@@ -136,6 +136,42 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory? = null) 
         }
     }
 
+    fun getPemilih(nik: String): Pemilih? {
+        val db = this.readableDatabase
+
+        // Define the columns you want to retrieve
+        val columns = arrayOf(ID_COL, NIK_COL, NAMA_COL, PHONE_COL, JK_COL, TANGGAL_COL, ALAMAT_COL, LAT_COL, LNG_COL, FOTO_COL)
+
+        // Define the selection (WHERE clause)
+        val selection = "$NIK_COL = ?"
+        val selectionArgs = arrayOf(nik)
+
+        // Query the database
+        val cursor = db.query(TABLE_NAME, columns, selection, selectionArgs, null, null, null)
+
+        // If a result is found
+        return if (cursor.moveToFirst()) {
+            // Extract data from cursor
+            val pemilih = Pemilih(
+                id = cursor.getInt(cursor.getColumnIndexOrThrow(ID_COL)),
+                nik = cursor.getString(cursor.getColumnIndexOrThrow(NIK_COL)),
+                nama = cursor.getString(cursor.getColumnIndexOrThrow(NAMA_COL)),
+                phone = cursor.getString(cursor.getColumnIndexOrThrow(PHONE_COL)),
+                jenisKelamin = cursor.getString(cursor.getColumnIndexOrThrow(JK_COL)),
+                tanggal = cursor.getString(cursor.getColumnIndexOrThrow(TANGGAL_COL)),
+                alamat = cursor.getString(cursor.getColumnIndexOrThrow(ALAMAT_COL)),
+                latitude = cursor.getDouble(cursor.getColumnIndexOrThrow(LAT_COL)),
+                longitude = cursor.getDouble(cursor.getColumnIndexOrThrow(LNG_COL)),
+                imgPath = cursor.getString(cursor.getColumnIndexOrThrow(FOTO_COL))
+            )
+            cursor.close() // Close the cursor
+            pemilih
+        } else {
+            cursor.close() // Close the cursor if no result found
+            null
+        }
+    }
+
     fun updatePemilih(id: Int, nik: String, nama: String): Int {
         val db = this.writableDatabase
         val contentValues = ContentValues().apply {
